@@ -36,9 +36,16 @@ function add_subscriber_to_fluentcrm( $entry, $form ) {
     $full_name = rgar( $entry, 'name_field_id' ); // Replace 'name_field_id' with your field ID
     $email = rgar( $entry, 'email_field_id' ); // Replace 'email_field_id' with your field ID
 
-    $name_parts = explode(' ', $full_name);
-    $first_name = $name_parts[0];
-    $last_name = count($name_parts) > 1 ? implode(' ', array_slice($name_parts, 1)) : '';
+    // Split the full name into an array of words separated by spaces.
+   $name_parts = explode(' ', $full_name);
+   
+   // Assign the first word of the name as the first name.
+   $first_name = $name_parts[0];
+   
+   // If there are more words after the first name, combine them as the last name. 
+   // If only one word is present, the last name remains empty.
+   $last_name = count($name_parts) > 1 ? implode(' ', array_slice($name_parts, 1)) : '';
+
 
     $data = [
         'first_name' => $first_name,
